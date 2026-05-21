@@ -4847,6 +4847,69 @@ body[data-lang="jp"] .drawer-contact b { color: #0a0a08; }
   /* Bundle gantt + 3-col foot are forced 1fr by .card-foot rule above */
   .bundle-foot .bundle-addon { font-size: 11px; padding: 10px 12px; }
 
+  /* ── SHELL FILLS THE VIEWPORT ON MOBILE ──
+     Desktop floats the manila doc on the desk with margin around it; on a phone
+     that margin just creates the "content doesn't fill the screen" misalignment
+     against the full-width mobile nav bar. Edge-to-edge on mobile. */
+  .shell {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 22px 16px 48px;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  body[data-lang="jp"] .shell {
+    width: 100%;
+    margin: 0;
+    padding: 22px 16px 48px;
+  }
+
+  /* ── STRUCTURE TREE DEMO: stack 3 branches vertically ──
+     The 3-column grid (KK / WFOE / PTE) was overflowing because `1fr` keeps a
+     min of min-content (entity name + redacted span = ~80px each, won't fit
+     3x in 300px). Switching to single column + dropping the horizontal
+     connector lines that no longer make sense vertically. */
+  .demo-structure .branches { grid-template-columns: 1fr; gap: 6px; }
+  .demo-structure .branches::before,
+  .demo-structure .branches::after,
+  .demo-structure .branches .stem-mid { display: none; }
+  .demo-structure .crossbar { display: none; }
+  .demo-structure .stem { display: none; }
+  .demo-structure .branch {
+    min-width: 0;
+    text-align: left;
+    padding: 10px 12px;
+  }
+  .demo-structure .branch .ent,
+  .demo-structure .branch .juris,
+  .demo-structure .branch .share {
+    text-align: left;
+    word-break: break-word;
+  }
+  .demo-structure .branch .share { border-top: none; padding-top: 2px; margin-top: 2px; }
+  .demo-structure .top-node { width: 100%; padding: 8px 12px; }
+
+  /* ── DEFENSIVE: ensure all multi-col grids can shrink below content ──
+     Add min-width:0 to grid/flex children that contain inline-block .r redactions
+     (which don't break and otherwise force their column wider than its share). */
+  .demo-app .spec-stage > *,
+  .demo-promo .promo-stage > *,
+  .promo-stage .filmstrip > *,
+  .app-detail-grid > *,
+  .bundle-foot > *,
+  .card-foot > *,
+  .stack-row > * { min-width: 0; }
+
+  /* Allow long unbreakable strings (urls, redacted spans) to wrap if they must */
+  .card-desc, .card-includes li, .stack-notes,
+  .demo-app .info-block .v, .demo-structure .branch,
+  .case-card .price-cycle { overflow-wrap: anywhere; word-break: break-word; }
+
+  /* Card-demo containers clip any internal overflow */
+  .card-demo, .card-demo-inner { overflow-x: hidden; }
+
   /* ── MOBILE OVERFLOW HARDENING ──
      Belt-and-suspenders against horizontal scroll from fixed-width children */
   .cyane-badge {
