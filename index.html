@@ -4910,6 +4910,67 @@ body[data-lang="jp"] .drawer-contact b { color: #0a0a08; }
   /* Card-demo containers clip any internal overflow */
   .card-demo, .card-demo-inner { overflow-x: hidden; }
 
+  /* ── CARD-LEVEL HARD CONTAINMENT ──
+     Each service card becomes its own overflow-clipping island so no internal
+     element (rotated phone mockup, fixed-width logo SVG, redaction span, folded
+     corner accent, Gantt label) can push the card past the viewport edge. */
+  .case-card {
+    overflow: hidden;        /* clip any spill from internal absolute/rotated elements */
+    max-width: 100%;
+    min-width: 0;
+  }
+  .case-card > *,
+  .card-head,
+  .card-demo,
+  .card-foot,
+  .card-stack,
+  .card-demo-inner,
+  .app-detail-grid,
+  .app-detail-grid > *,
+  .bundle-foot,
+  .bundle-foot > * {
+    max-width: 100%;
+    min-width: 0;
+  }
+  /* Folded-corner decorative accent overlaps card edge by 1px on desktop —
+     on mobile that single pixel was enough to trip iOS viewport-fit-to-content.
+     Snap them flush instead. */
+  .case-card::before,
+  .case-card.bundle::before { top: 0; right: 0; }
+
+  /* SVGs inside any demo must scale, never push past their parent */
+  .card-demo svg, .card-demo img, .card-demo video,
+  .demo-app svg, .demo-promo svg, .demo-web svg,
+  .group-logo-sheet svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Mobile drawer when closed: also visibility-hidden so its off-screen
+     translated position doesn't influence layout on any device */
+  .mobile-drawer { visibility: hidden; }
+  .mobile-drawer.open { visibility: visible; }
+
+  /* ── GROUP-LOGO BLOCK CENTERING ──
+     The Altixena footer logo (.group-logo-sheet) was left-aligned in its
+     single-column grid cell on mobile because justify-self defaulted to
+     stretch. Center the three stacked elements (affiliation note, logo card,
+     divisions list). */
+  .group-block {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+  .group-logo-sheet {
+    justify-self: center;
+    margin: 0 auto;
+  }
+  .group-affil,
+  .group-divisions {
+    justify-self: center;
+    width: 100%;
+    text-align: center;
+  }
+
   /* ── MOBILE OVERFLOW HARDENING ──
      Belt-and-suspenders against horizontal scroll from fixed-width children */
   .cyane-badge {
