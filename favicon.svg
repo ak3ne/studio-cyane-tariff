@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -30 190 190">
+  <!-- Cyane cyan rounded-square background -->
+  <rect x="-20" y="-30" width="190" height="190" rx="30" fill="#08B8DC"/>
+
+  <!-- Subtle inner stroke for definition at very small sizes -->
+  <rect x="-17.5" y="-27.5" width="185" height="185" rx="27.5"
+        fill="none" stroke="rgba(10,10,10,0.18)" stroke-width="2"/>
+
+  <!-- ────── CHIIKAWA TOYGER CAT — copied from funky logo, slightly simplified ────── -->
+
+  <!-- Head silhouette stroke -->
+  <path d="M 42 -8 L 66 55 C 72 50, 80 50, 88 55 L 110 -8 L 132 50 C 142 60, 146 80, 144 102 C 140 124, 120 134, 95 134 C 80 136, 65 136, 50 134 C 25 134, 4 124, 2 102 C 0 80, 4 60, 14 50 Z"
+        fill="none" stroke="#0A0A0A" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Head silhouette fill (copper) -->
+  <path d="M 42 -8 L 66 55 C 72 50, 80 50, 88 55 L 110 -8 L 132 50 C 142 60, 146 80, 144 102 C 140 124, 120 134, 95 134 C 80 136, 65 136, 50 134 C 25 134, 4 124, 2 102 C 0 80, 4 60, 14 50 Z"
+        fill="#C2723E" stroke="none"/>
+
+  <!-- Inner ears (peach) -->
+  <path d="M 46 6 L 60 46 L 72 50 Z" fill="#E89C8A"/>
+  <path d="M 106 6 L 92 50 L 80 46 Z" fill="#E89C8A"/>
+
+  <!-- Cream chin patch -->
+  <ellipse cx="74" cy="115" rx="38" ry="14" fill="#F0D5B0"/>
+
+  <!-- Toyger M-mark on forehead (bold) -->
+  <path d="M 50 58 L 60 44 L 74 54 L 88 44 L 98 58"
+        stroke="#4A2A14" stroke-width="5.5" fill="none"
+        stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- Eyes — slightly larger than original for favicon visibility at small sizes -->
+  <ellipse cx="48" cy="86" rx="7.5" ry="9.5" fill="#0A0A0A"/>
+  <ellipse cx="100" cy="86" rx="7.5" ry="9.5" fill="#0A0A0A"/>
+
+  <!-- Pink cheek blushes -->
+  <ellipse cx="30" cy="106" rx="7" ry="5" fill="#F5A8A0" opacity="0.9"/>
+  <ellipse cx="118" cy="106" rx="7" ry="5" fill="#F5A8A0" opacity="0.9"/>
+
+  <!-- Small pink nose -->
+  <path d="M 68 106 L 80 106 L 74 113 Z" fill="#C88880"/>
+
+  <!-- ω mouth -->
+  <path d="M 74 113 C 75 119, 80 119, 81 114 C 82 119, 87 119, 88 114"
+        stroke="#0A0A0A" stroke-width="2.6" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 74 113 C 73 119, 68 119, 67 114 C 66 119, 61 119, 60 114"
+        stroke="#0A0A0A" stroke-width="2.6" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Tiny cyane heart on chin — for the signature Cyane touch -->
+  <path d="M 74 132 C 71 129, 66 130, 66 134 C 66 138, 74 143, 74 143 C 74 143, 82 138, 82 134 C 82 130, 77 129, 74 132 Z"
+        fill="#08B8DC" stroke="#0A0A0A" stroke-width="1.8" stroke-linejoin="round"/>
+</svg>
