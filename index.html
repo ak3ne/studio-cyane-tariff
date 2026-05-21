@@ -4127,6 +4127,32 @@ body[data-lang="jp"] .stack-notes b { color: #e63946; }
 body[data-lang="jp"] :focus-visible { outline-color: #e63946; }
 
 /* ──────────────────────────────────────────────────────────────
+   CN MODE: hide published pricing (partner convention)
+   Per Shanghai partner's recommendation: Chinese B2B prefers
+   case-by-case pricing discussion. Real numbers stay for EN+JP
+   audiences; CN shows 面議 ("negotiable / discuss in person").
+   ────────────────────────────────────────────────────────────── */
+
+/* Hide the small "RANGE / 區間" label above each price — '面議' speaks for itself */
+body[data-lang="cn"] .case-card:not(.contact-only) .price-from { display: none; }
+
+/* Hide the bundle's savings callout — also gives away pricing strategy */
+body[data-lang="cn"] .price-savings { display: none; }
+
+/* Restyle the price-amount text in CN mode (it's now text, not a number, so the
+   typographic emphasis should shift accordingly — slightly smaller, italicised
+   in the way an editorial note would appear, in the brand stamp-red). */
+body[data-lang="cn"] .case-card:not(.contact-only) .price-amount {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-style: italic;
+  color: var(--stamp-red);
+  letter-spacing: 0.04em;
+}
+/* JP-mode override of CN restyle would apply too — but CN and JP are mutually
+   exclusive on body[data-lang] so no conflict. */
+
+/* ──────────────────────────────────────────────────────────────
    DESKTOP STICKY NAV BAR  (≥769px) — persistent service navigation
    ────────────────────────────────────────────────────────────── */
 .desktop-nav-bar {
@@ -5266,7 +5292,7 @@ body[data-lang="jp"] .drawer-contact b { color: #0a0a08; }
     </h1>
 
     <p class="subhead">
-      <span class="l-cn">Studio Cyane 為跨境創始人提供七項獨立服務 — 從品牌視覺重塑、雙語商業計劃、全媒體宣傳物料、跨境公司架構、運營架構設計、到網站與應用程序載體 — 或一份整合的全套捆綁(STC·07 創始人運營系統)。每一項都可單獨採購,也可組合配置。下列為當前服務檔案與價格區間。</span>
+      <span class="l-cn">Studio Cyane 為跨境創始人提供七項獨立服務 — 從品牌視覺重塑、雙語商業計劃、全媒體宣傳物料、跨境公司架構、運營架構設計、到網站與應用程序載體 — 或一份整合的全套捆綁(STC·07 創始人運營系統)。每一項都可單獨採購,也可組合配置。具體報價依需求對話確定 · 詳細請聯絡。</span>
       <span class="l-jp">Studio Cyane は越境創業者向けに七つの独立サービスを提供します — ブランド視覚刷新、二言語事業計画、全メディアプロモーション素材、国際法人ストラクチャー、運営アーキテクチャ、ウェブとアプリの媒体まで — または統合バンドル(STC·07 創業者OS)として一括で。各サービスは単独でも、組み合わせでもご利用いただけます。</span>
       <span class="l-en">Studio Cyane provides seven standalone services for cross-border founders — from full brand identity revamp, to bilingual business plans, to full-media promotional materials, to multi-jurisdiction corporate structure, to operations architecture, to web and app vessels — or as one integrated bundle (STC·07 Founder Operating System). Each can be purchased independently or composed. Below: current catalogue and price ranges.</span>
     </p>
@@ -5388,7 +5414,7 @@ body[data-lang="jp"] .drawer-contact b { color: #0a0a08; }
       <div class="legend-cell">
         <b><span class="l-cn">單項採購</span><span class="l-jp">単品購入</span><span class="l-en">SOLO PURCHASE</span></b>
         <span class="desc">
-          <span class="l-cn">任意服務皆可單獨採購 · 列表價執行</span>
+          <span class="l-cn">任意服務皆可單獨採購 · 個別報價</span>
           <span class="l-jp">どのサービスも単独購入可 · リスト価格</span>
           <span class="l-en">any service standalone · list price as shown</span>
         </span>
@@ -6794,14 +6820,20 @@ body[data-lang="jp"] .drawer-contact b { color: #0a0a08; }
     state.currency = cur;
     document.body.dataset.currency = cur;
     const t = PRICES[cur];
+    // CN convention (partner's call 2026-05-21): pricing is discussed
+    // case-by-case in conversation, not published on the public page.
+    // EN + JP still show real ranges. Only CN swaps to 面議.
+    const cnMode = state.lang === 'cn';
     document.querySelectorAll('[data-tier]').forEach(el => {
       const tier = el.dataset.tier;
       if (!tier || !t.range[tier]) return;
-      el.textContent = t.range[tier];
+      el.textContent = cnMode ? '面議' : t.range[tier];
       el.classList.remove('shift'); void el.offsetWidth; el.classList.add('shift');
     });
     document.querySelectorAll('[data-currency-label]').forEach(el => {
-      el.textContent = ({cny:'CNY', jpy:'JPY', usd:'USD'}[cur]);
+      el.textContent = cnMode
+        ? '詳細請聯絡'
+        : ({cny:'CNY', jpy:'JPY', usd:'USD'}[cur]);
     });
   }
 
